@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Detection</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background: linear-gradient(135deg,#11998e,#38ef7d);
+            padding:20px;
+        }
+
+        .container{
+            width:100%;
+            max-width:650px;
+            background:#fff;
+            border-radius:20px;
+            padding:40px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.2);
+            text-align:center;
+        }
+
+        .title{
+            color:#1b5e20;
+            margin-bottom:10px;
+            font-size:2.2rem;
+        }
+
+        .subtitle{
+            color:#666;
+            margin-bottom:30px;
+            font-size:1rem;
+        }
+
+        .upload-box{
+            border:2px dashed #4caf50;
+            border-radius:15px;
+            padding:30px;
+            transition:0.3s ease;
+        }
+
+        .upload-box:hover{
+            background:#f4fff4;
+        }
+
+        input[type="file"]{
+            width:100%;
+            padding:15px;
+            border:none;
+            outline:none;
+            cursor:pointer;
+        }
+
+        button{
+            margin-top:25px;
+            width:100%;
+            padding:15px;
+            border:none;
+            border-radius:10px;
+            background:#2e7d32;
+            color:#fff;
+            font-size:1rem;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#1b5e20;
+            transform:translateY(-2px);
+        }
+
+        .preview-section{
+            margin-top:30px;
+        }
+
+        .preview-section img{
+            width:100%;
+            max-width:300px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .result-box{
+            margin-top:30px;
+            background:#e8f5e9;
+            border-left:6px solid #2e7d32;
+            padding:20px;
+            border-radius:10px;
+        }
+
+        .result-box h2{
+            color:#1b5e20;
+            font-size:1.5rem;
+        }
+
+        @media(max-width:768px){
+
+            .container{
+                padding:25px;
+            }
+
+            .title{
+                font-size:1.8rem;
+            }
+
+            button{
+                padding:14px;
+            }
+        }
+
+        @media(max-width:480px){
+
+            .container{
+                padding:20px;
+            }
+
+            .title{
+                font-size:1.5rem;
+            }
+
+            .subtitle{
+                font-size:0.9rem;
+            }
+
+            .upload-box{
+                padding:20px;
+            }
+
+            button{
+                font-size:0.95rem;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1 class="title">🌿 Plant Disease Detection</h1>
+
+    <p class="subtitle">
+        Upload a plant leaf image and identify diseases instantly using AI.
+    </p>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <div class="upload-box">
+            <input type="file"
+                   name="image"
+                   id="imageInput"
+                   accept="image/*"
+                   required>
+        </div>
+
+        <button type="submit">
+            Predict Disease
+        </button>
+
+    </form>
+
+    <!-- Image Preview -->
+    <div class="preview-section">
+        {% if image_path %}
+            <h3>Uploaded Image</h3>
+            <br>
+            <img src="{{ image_path }}" alt="Uploaded Image">
+        {% endif %}
+    </div>
+
+    <!-- Prediction Result -->
+    {% if prediction %}
+    <div class="result-box">
+        <h2>Prediction: {{ prediction }}</h2>
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
